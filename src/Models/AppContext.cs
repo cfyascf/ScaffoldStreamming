@@ -1,7 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+namespace App.Models;
 
-public class AppContext : DbContext
+using Microsoft.EntityFrameworkCore;
+
+public class ApplicationContext : DbContext
 {
     public DbSet<UserData> Users { get; set; }
     public DbSet<Chanel> Chanels { get; set; }
@@ -14,12 +15,10 @@ public class AppContext : DbContext
     public DbSet<Like> Likes { get; set; }
     public DbSet<Dislike>  Dislikes { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-    {
-        options.UseSqlServer("Data Source=SJP-C-00002\\SQLEXPRESS01;Initial Catalog=scaffolddb;TrustServerCertificate=True;Integrated Security=True;");
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) {}
 
-        options.LogTo(Console.WriteLine, LogLevel.Information);
-    }
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+        => options.UseSqlServer("Data Source=SJP-C-00002\\SQLEXPRESS01;Initial Catalog=scaffoldstreammingdb;TrustServerCertificate=True;Integrated Security=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,6 +31,7 @@ public class AppContext : DbContext
         Content.BuildEntity(modelBuilder);
         Comment.BuildEntity(modelBuilder);
         Like.BuildEntity(modelBuilder);
+    
         Dislike.BuildEntity(modelBuilder);
     }
 }

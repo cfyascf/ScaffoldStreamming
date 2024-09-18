@@ -1,10 +1,13 @@
 namespace App.Repositories;
 
-public class ContentRepository
-{
-    private readonly AppContext ctx;
+using App.Interfaces.Repositories;
+using App.Models;
 
-    public ContentRepository(AppContext context)
+public class ContentRepository : IContentRepository
+{
+    private readonly ApplicationContext ctx;
+
+    public ContentRepository(ApplicationContext context)
         => ctx = context;
 
     public async Task<Content> Create(Content content)
@@ -13,5 +16,10 @@ public class ContentRepository
         await ctx.SaveChangesAsync();
 
         return content;
+    }
+
+    public async Task<Content> GetById(Guid id)
+    {
+        return await ctx.Contents.FindAsync(id);
     }
 }

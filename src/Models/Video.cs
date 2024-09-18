@@ -1,8 +1,10 @@
+namespace App.Models;
+
 using Microsoft.EntityFrameworkCore;
 
 public class Video
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
     public required string Title { get; set; }
     public required string Description { get; set; }
     public ICollection<PlaylistVideo>? Playlists { get; set; }
@@ -18,5 +20,16 @@ public class Video
             video.Property(v => v.Id)
                 .HasDefaultValueSql("NEWID()");
         });
+    }
+
+    public static Video CreateEntity(string title, string description)
+    {
+        var video = new Video
+        {
+            Title = title,
+            Description = description
+        };
+
+        return video;
     }
 }

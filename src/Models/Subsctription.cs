@@ -1,9 +1,10 @@
+namespace App.Models;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 public class Subscription
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
     public required UserData User { get; set; }
     public required Chanel Chanel { get; set; }
 
@@ -23,4 +24,19 @@ public class Subscription
                 .OnDelete(DeleteBehavior.NoAction);
         });
     }
+
+    public static Subscription CreateEntity(UserData user, Chanel chanel)
+    {
+        var subscription = new Subscription
+        {
+            User = user,
+            Chanel = chanel
+        };
+
+        user.Subscriptions!.Add(subscription);
+        chanel.Subscriptions!.Add(subscription);
+
+        return subscription;
+    }
+
 }

@@ -1,8 +1,11 @@
+namespace App.Models;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 public class PlaylistVideo
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
     public required Playlist Playlist { get; set; }
     public required Video Video { get; set; }
 
@@ -14,4 +17,19 @@ public class PlaylistVideo
                 .HasDefaultValueSql("NEWID()");
         });
     }
+
+    public static PlaylistVideo CreateEntity(Playlist playlist, Video video)
+    {
+        var playlistVideo = new PlaylistVideo
+        {
+            Playlist = playlist,
+            Video = video
+        };
+
+        playlist.Videos!.Add(playlistVideo);
+        video.Playlists!.Add(playlistVideo);
+
+        return playlistVideo;
+    }
+
 }

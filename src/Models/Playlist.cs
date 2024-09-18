@@ -1,11 +1,13 @@
+namespace App.Models;
+
 using Microsoft.EntityFrameworkCore;
 
 public class Playlist
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
     public required string Name { get; set; }
     public required UserData User { get; set; }
-    public ICollection<PlaylistVideo>? Videos { get; set; }
+    public List<PlaylistVideo>? Videos { get; set; } = new();
 
     public static void BuildEntity(ModelBuilder model)
     {
@@ -14,4 +16,17 @@ public class Playlist
                 .HasDefaultValueSql("NEWID()");
         });
     }
+
+    public static Playlist CreateEntity(UserData user, string name)
+    {
+        var playlist = new Playlist
+        {
+            Name = name,
+            User = user
+        };
+
+        user.Playlists!.Add(playlist);
+
+        return playlist;
+    }    
 }

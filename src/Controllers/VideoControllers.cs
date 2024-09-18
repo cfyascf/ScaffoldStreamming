@@ -1,21 +1,29 @@
-using Microsoft.AspNetCore.Mvc;
+namespace App.Controllers;
 
-namespace ScaffoldStreamming.Controllers;
+using App.Data.Payloads;
+using App.Service;
+using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("video")]
 public class VideoController : ControllerBase
 {
+    private readonly VideoService service;
 
-    [HttpGet("{id}")]
-    public async IEnumerable<WeatherForecast> Get()
+    public VideoController(VideoService videoService)
+        => service = videoService;
+
+    [HttpGet("upload")]
+    public async Task<ActionResult> UploadVideo(VideoUploadPayload payload)
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        var M3u8Header = await service.UploadVideo(payload);
+        return Created("/video/upload", M3u8Header);
+    }
+
+    [HttpGet("play/{id}")]
+    public async Task<ActionResult> PlayVideo(Guid id)
+    {
+        var content = await service.GetContentById(id);
+        return Ok(content);
     }
 }

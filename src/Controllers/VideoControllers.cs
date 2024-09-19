@@ -13,11 +13,20 @@ public class VideoController : ControllerBase
     public VideoController(VideoService videoService)
         => service = videoService;
 
-    [HttpGet("upload")]
-    public async Task<ActionResult> UploadVideo(VideoUploadPayload payload)
+    [HttpPost("upload")]
+    public async Task<ActionResult> UploadVideo([FromForm] VideoUploadPayload payload)
     {
-        var M3u8Header = await service.UploadVideo(payload);
-        return Created("/video/upload", M3u8Header);
+        try 
+        {
+            var M3u8Header = await service.UploadVideo(payload);
+            return Created("/video/upload", M3u8Header);
+        }
+        catch(Exception e) 
+        {
+            Console.WriteLine(e);
+            return null;
+        }
+
     }
 
     [HttpGet("play/{id}")]

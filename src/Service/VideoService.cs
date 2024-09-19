@@ -9,7 +9,6 @@ using App.Interfaces.Repositories;
 
 public class VideoService
 {
-    private readonly string Dir = "src\\Uploads";
     private readonly IContentRepository contentRepo;
     private readonly IVideoRepository videoRepo;
 
@@ -43,8 +42,8 @@ public class VideoService
 
         // ..creates a temporary directory 
         // and saves the file in it..
-        var uploadingDir = Directory.CreateTempSubdirectory(Path.Combine(Dir, payload.Title));
-        var videoPath = Path.Combine(uploadingDir.FullName, "video.mp4");
+        var uploadingDir = Directory.CreateTempSubdirectory(payload.Title);
+        var videoPath = Path.Combine(uploadingDir.FullName, payload.Title+ ".mp4");
         File.WriteAllBytes(videoPath, bytes);
 
         return videoPath;
@@ -52,12 +51,13 @@ public class VideoService
 
     private void ConvertToM38u(string videoPath)
     {
+        var dir = BuildFfmpegCommand(videoPath);
         using Process process = new Process
 		{
 			StartInfo = new ProcessStartInfo
 			{
-				FileName = "cmd.exe",
-				Arguments = "/c " + BuildFfmpegCommand(Path.GetFileName(videoPath)),
+				FileName = "ffmpeg.exe",
+				Arguments = BuildFfmpegCommand(dir),
 				CreateNoWindow = true
 			}
 		};
@@ -68,7 +68,9 @@ public class VideoService
 
     private string BuildFfmpegCommand(string fileName)
     {
-        return $"ffmpeg -i \"{fileName.Replace("\"", "\\\"")}\" " +
+        var output = Path.GetDirectoryName(fileName) + "\\output.m3u8";
+
+        return $"-i {fileName} " +
                "-profile:v baseline " +
                "-level 3.0 " +
                "-s 960x540 " +
@@ -76,7 +78,7 @@ public class VideoService
                "-hls_time 10 " +
                "-hls_list_size 0 " +
                "-f hls " +
-               $"\"{fileName.Replace("\"", "\\\"")}\"";
+                $"{output}";
     }
 
     private async Task<Content> SaveIntoDb(string filePath, VideoUploadPayload payload)

@@ -3,12 +3,8 @@ namespace App.Repositories;
 using App.Interfaces.Repositories;
 using App.Models;
 
-public class DislikeRepository : IDislikeRepository
+public class DislikeRepository(ApplicationContext ctx) : IDislikeRepository
 {
-    private readonly ApplicationContext ctx;
-
-    public DislikeRepository(ApplicationContext context)
-        => ctx = context;
 
     public async Task<Dislike> Create(Dislike dislike)
     {

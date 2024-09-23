@@ -1,4 +1,5 @@
-﻿using App.Interfaces.Repositories;
+﻿using App.Exceptions;
+using App.Interfaces.Repositories;
 using App.Models;
 using App.Repositories;
 using App.Service;
@@ -11,12 +12,22 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationContext>(
-    options => options.UseSqlServer("Data Source=SJP-C-00002\\SQLEXPRESS01;Initial Catalog=scaffoldstreammingdb;Integrated Security=true;Trust Server Certificate=True")
+    options => options.UseSqlServer("Data Source=CA-C-00657\\SQLEXPRESS;Initial Catalog=scaffoldstreammingdb;Integrated Security=true;Trust Server Certificate=True")
 );
 
 builder.Services.AddScoped<IVideoRepository, VideoRepository>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 builder.Services.AddScoped<VideoService, VideoService>();
+
+builder.Services.AddCors(op => op
+    .AddPolicy("main", policy => policy
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin()
+    )
+);
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 var app = builder.Build();
 
@@ -25,6 +36,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("main");
 
 app.UseHttpsRedirection();
 

@@ -10,12 +10,12 @@ public class UserData
     public required DateTime BirthDate { get; set; }
     public required string Password { get; set; }
     public required int Role { get; set; }
-    public List<Chanel>? Chanels { get; set; } = new();
-    public List<Subscription>? Subscriptions { get; set; } = new();
-    public List<Comment>? Comments { get; set; } = new();
-    public List<Dislike>? Dislikes { get; set; } = new();
-    public List<Like>? Likes { get; set; } = new();
-    public List<Playlist>? Playlists { get; set; } = new();
+    public List<Chanel>? Chanels { get; set; } = [];
+    public List<Subscription>? Subscriptions { get; set; } = [];
+    public List<Comment>? Comments { get; set; } = [];
+    public List<Dislike>? Dislikes { get; set; } = [];
+    public List<Like>? Likes { get; set; } = [];
+    public List<Playlist>? Playlists { get; set; } = [];
 
     public static void BuildEntity(ModelBuilder model)
     {

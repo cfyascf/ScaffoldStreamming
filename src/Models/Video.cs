@@ -7,11 +7,11 @@ public class Video
     public Guid Id { get; set; }
     public required string Title { get; set; }
     public required string Description { get; set; }
-    public ICollection<PlaylistVideo>? Playlists { get; set; }
-    public ICollection<Like>? Likes { get; set; }
-    public ICollection<Dislike>? Dislikes { get; set; }
-    public ICollection<Comment>? Comments { get; set; }
-    public ICollection<Content>? Contents { get; set; }
+    public List<PlaylistVideo>? Playlists { get; set; } = new();
+    public List<Like>? Likes { get; set; } = new();
+    public List<Dislike>? Dislikes { get; set; } = new();
+    public List<Comment>? Comments { get; set; } = new();
+    public List<Content>? Contents { get; set; } = new();
 
     public static void BuildEntity(ModelBuilder model)
     {

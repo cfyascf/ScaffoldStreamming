@@ -3,12 +3,8 @@ namespace App.Repositories;
 using App.Interfaces.Repositories;
 using App.Models;
 
-public class ContentRepository : IContentRepository
+public class ContentRepository(ApplicationContext ctx) : IContentRepository
 {
-    private readonly ApplicationContext ctx;
-
-    public ContentRepository(ApplicationContext context)
-        => ctx = context;
 
     public async Task<Content> Create(Content content)
     {

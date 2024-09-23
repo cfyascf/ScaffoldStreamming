@@ -7,7 +7,7 @@ public class Content
 {
     [Key]
     public Guid Id { get; set; }
-    public required byte[] Data { get; set; }
+    public required byte[] Data { get; set; } = [];
     public required Video Video { get; set; }
     public required bool IsHeader { get; set; }
 

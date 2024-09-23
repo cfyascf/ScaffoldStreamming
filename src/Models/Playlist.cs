@@ -7,7 +7,7 @@ public class Playlist
     public Guid Id { get; set; }
     public required string Name { get; set; }
     public required UserData User { get; set; }
-    public List<PlaylistVideo>? Videos { get; set; } = new();
+    public List<PlaylistVideo>? Videos { get; set; } = [];
 
     public static void BuildEntity(ModelBuilder model)
     {

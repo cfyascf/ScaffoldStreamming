@@ -3,13 +3,8 @@ namespace App.Repositories;
 using App.Interfaces.Repositories;
 using App.Models;
 
-public class LikeRepository : ILikeRepository
+public class LikeRepository(ApplicationContext ctx) : ILikeRepository
 {
-    private readonly ApplicationContext ctx;
-
-    public LikeRepository(ApplicationContext context)
-        => ctx = context;
-
     public async Task<Like> Create(Like like)
     {
         await ctx.AddAsync(like);

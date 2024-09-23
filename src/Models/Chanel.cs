@@ -11,7 +11,7 @@ public class Chanel
     public string? Introduction { get; set; }
     public DateTime CreatedAt { get; set; }
     public required UserData User { get; set; }
-    public List<Subscription>? Subscriptions { get; set; } = new();
+    public List<Subscription>? Subscriptions { get; set; } = [];
 
     public static void BuildEntity(ModelBuilder model)
     {

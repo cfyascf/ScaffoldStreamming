@@ -11,7 +11,7 @@ public class UserService(IUserRepository repository, PasswordService passService
 {
     public async Task<UserDTO> CreateUser(CreateUserPayload payload)
     {
-        var existingEmail = repository.GetByEmail(payload.Email);
+        var existingEmail = await repository.GetByEmail(payload.Email);
         if(existingEmail != null)
             throw new GlobalException("Email already in use.", 400);
 

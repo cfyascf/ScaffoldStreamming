@@ -25,6 +25,6 @@ public class UserController(UserService service) : ControllerBase
     public async Task<ActionResult> GetUser(Guid id)
     {
         var response = await service.GetUserById(id);
-        return Ok(new DefaultResponse<UserDTO>("User created successfully!", response));
+        return Ok(new DefaultResponse<UserDTO>("User found!", response));
     }
 }

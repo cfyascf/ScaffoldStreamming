@@ -18,7 +18,7 @@ public class ApplicationContext : DbContext
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) {}
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlServer("Data Source=CA-C-00657\\SQLEXPRESS;Initial Catalog=scaffoldstreammingdb;TrustServerCertificate=True;Integrated Security=True;");
+        => options.UseSqlServer("Data Source=SJP-C-00002\\SQLEXPRESS01;Initial Catalog=scaffoldstreammingdb;TrustServerCertificate=True;Integrated Security=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

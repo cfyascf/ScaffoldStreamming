@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ScaffoldStreamming.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240920171950_InitialCreate")]
+    [Migration("20240925140245_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

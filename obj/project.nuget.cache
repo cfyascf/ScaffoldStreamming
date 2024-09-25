@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nnGNdZb/Mlo=",
+  "dgSpecHash": "M0HL2bt9ncdun0lfdrmW7/P7XjS6V32zqecpXPDG9qC7UqMYkquFVyQe0q+0db8dDHBDnUt9hZIQDpEDIPNczw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\disrct\\Desktop\\yasmim\\csharp\\ScaffoldStreamming\\ScaffoldStreamming.csproj",
+  "projectFilePath": "C:\\Users\\disrct\\Desktop\\yasmim\\ScaffoldStreamming\\ScaffoldStreamming.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\disrct\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\disrct\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\disrct\\Desktop\\yasmim\\csharp\\ScaffoldStreamming\\ScaffoldStreamming.csproj": {}
+    "C:\\Users\\disrct\\Desktop\\yasmim\\ScaffoldStreamming\\ScaffoldStreamming.csproj": {}
   },
   "projects": {
-    "C:\\Users\\disrct\\Desktop\\yasmim\\csharp\\ScaffoldStreamming\\ScaffoldStreamming.csproj": {
+    "C:\\Users\\disrct\\Desktop\\yasmim\\ScaffoldStreamming\\ScaffoldStreamming.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\disrct\\Desktop\\yasmim\\csharp\\ScaffoldStreamming\\ScaffoldStreamming.csproj",
+        "projectUniqueName": "C:\\Users\\disrct\\Desktop\\yasmim\\ScaffoldStreamming\\ScaffoldStreamming.csproj",
         "projectName": "ScaffoldStreamming",
-        "projectPath": "C:\\Users\\disrct\\Desktop\\yasmim\\csharp\\ScaffoldStreamming\\ScaffoldStreamming.csproj",
+        "projectPath": "C:\\Users\\disrct\\Desktop\\yasmim\\ScaffoldStreamming\\ScaffoldStreamming.csproj",
         "packagesPath": "C:\\Users\\disrct\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\disrct\\Desktop\\yasmim\\csharp\\ScaffoldStreamming\\obj\\",
+        "outputPath": "C:\\Users\\disrct\\Desktop\\yasmim\\ScaffoldStreamming\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\disrct\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net7.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -32,16 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -85,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
         }
       }
     }

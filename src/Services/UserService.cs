@@ -1,12 +1,13 @@
 using System.Globalization;
 using App.Data.Payloads;
+using App.Data.Responses;
 using App.Exceptions;
 using App.Interfaces.Repositories;
 using App.Models;
 
 namespace App.Services;
 
-public class UserService(IUserRepository repository, PasswordService passService)
+public class UserService(IUserRepository repository, PasswordService passService, UnitOfWork unitOfWork)
 {
     public async Task<UserDTO> CreateUser(CreateUserPayload payload)
     {
@@ -29,7 +30,7 @@ public class UserService(IUserRepository repository, PasswordService passService
         return UserDTO.BuildFromEntity(user);
     }
 
-    public async Task<UserDTO> GetById(Guid id)
+    public async Task<UserDTO> GetUserById(Guid id)
     {
         var user = await repository.GetById(id)
             ?? throw new GlobalException("User not found.", 404);
@@ -57,11 +58,17 @@ public class UserService(IUserRepository repository, PasswordService passService
         if(payload.Fullname != null)
             user.Fullname = payload.Fullname;
 
-        // if(payload.BirthDate != null)
-        // {
-        //     user.BirthDate = payload.BirthDate;
-        // }
+        if(payload.BirthDate != null)
+        {
+            user.BirthDate = DateTime.ParseExact(
+                payload.BirthDate, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+        }
 
-        return null;
+        if(payload.Password != null)
+            user.Password = passService.HashPassword(payload.Password);
+
+        await unitOfWork.SaveChanges();
+
+        return UserDTO.BuildFromEntity(user);
     }
 }

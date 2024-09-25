@@ -1,6 +1,7 @@
 namespace App.Controllers;
 
 using App.Data.Payloads;
+using App.Data.Responses;
 using App.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +13,9 @@ public class VideoController(VideoService service) : ControllerBase
     [HttpPost("upload")]
     public async Task<ActionResult> UploadVideo([FromForm] VideoUploadPayload payload)
     {
-        var header = await service.UploadVideo(payload);
+        var response = await service.UploadVideo(payload);
         return Created("/video/upload", 
-            new DefaultResponse<Guid>("Video uploaded successfully!", header.Id)
+            new DefaultResponse<Guid>("Video uploaded successfully!", response)
         );
     }
 

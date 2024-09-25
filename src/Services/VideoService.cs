@@ -17,13 +17,13 @@ public class VideoService(IVideoRepository videoRepo, IContentRepository content
         return content.Data;
     }
     
-    public async Task<Content> UploadVideo(VideoUploadPayload payload)
+    public async Task<Guid> UploadVideo(VideoUploadPayload payload)
     {
         var videoPath = WriteFile(payload);
         ConvertToM38u(videoPath);
         var header = await SaveIntoDb(videoPath, payload);
 
-        return header;
+        return header.Id;
     }
 
     private string WriteFile(VideoUploadPayload payload)

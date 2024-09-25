@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 namespace App.Exceptions;
 
-public class GlobalExceptionHandler(ILogger<ApplicationException> _logger) : IExceptionHandler
+public class GlobalExceptionHandler(ILogger<GlobalException> _logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext, 
@@ -11,19 +11,40 @@ public class GlobalExceptionHandler(ILogger<ApplicationException> _logger) : IEx
     {
         ProblemDetails details;
 
-        if(exception is GlobalException applicationException)
+        if(exception is GlobalException globalException)
         {
             _logger.LogError(
-                applicationException,
+                globalException,
                 "Exception occurred: {Message}",
-                applicationException.Message
+                globalException.Message
             );
 
             details = new ProblemDetails
             {
-                Status = applicationException.StatusCode,
+                Status = globalException.StatusCode,
                 Title = "Application Exception",
-                Detail = applicationException.Message
+                Detail = globalException.Message
+            };
+
+            httpContext.Response.StatusCode = details.Status.Value;
+            await httpContext.Response.WriteAsJsonAsync(details, cancellationToken);
+
+            return true;
+        }
+
+        if(exception is FormatException formatException)
+        {
+            _logger.LogError(
+                formatException,
+                "Exception occurred: {Message}",
+                formatException.Message
+            );
+
+            details = new ProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Title = "Format Exception",
+                Detail = formatException.Message
             };
 
             httpContext.Response.StatusCode = details.Status.Value;

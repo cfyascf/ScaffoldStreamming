@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ScaffoldStreamming")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fd5fa5c5561849c3500c0b832114a5bbaaea0d2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+542baf57eb0298eeef3d3ab266179c2f72b691f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("ScaffoldStreamming")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ScaffoldStreamming")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

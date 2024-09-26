@@ -14,7 +14,7 @@ public class UserController(UserService service) : ControllerBase
         return Created("/user", new DefaultResponse<UserDTO>("User created successfully!", response));
     }
 
-    [HttpPost("update")]
+    [HttpPut]
     public async Task<ActionResult> UpdateUser(UpdateUserPayload payload)
     {
         var response = await service.UpdateUser(payload);
